@@ -1,3 +1,5 @@
+@SubmarineAnnotation(missiles = 5,name = "Leningrad",started = true)
+
 public class NucSubmarine
 {
     public class EngineOfNucSubmarine
@@ -14,11 +16,5 @@ public class NucSubmarine
         System.out.println("Submarine is preparing to launch!");
         engineOfSub.startSubmarineEngine();
         System.out.println("Submarine is launched!");
-    }
-
-    @SubmarineAnnotation(missiles = 5,name = "Leningrad",started = true)
-    public NucSubmarine()
-    {
-        launchNucSubmarine();
     }
 }

@@ -1,6 +1,6 @@
 import java.lang.annotation.*;
 
-@Target(ElementType.CONSTRUCTOR)
+@Target(ElementType.TYPE)
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SubmarineAnnotation
