@@ -1,17 +1,17 @@
 public class NucSubmarine
 {
-    private class EngineOfNucSubmarine
+
+    public class EngineOfNucSubmarine
     {
         void startSubmarineEngine()
         {
             System.out.println("The engine of the nuclear submarine started!");
         }
     }
-
-    private EngineOfNucSubmarine engineOfSub = new EngineOfNucSubmarine();
-
+    
     public void launchNucSubmarine()
     {
+        EngineOfNucSubmarine engineOfSub = new EngineOfNucSubmarine();
         System.out.println("Submarine is preparing to launch!");
         engineOfSub.startSubmarineEngine();
         System.out.println("Submarine is launched!");
