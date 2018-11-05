@@ -26,7 +26,14 @@ public class Notepad
       }
       else
       {
-          throw new NullPointerException("No records!");
+          try
+          {
+              throw new NullPointerException("Error");
+          }
+          catch(NullPointerException e)
+          {
+              System.out.println("No records!");
+          }
       }
     }
 
