@@ -39,9 +39,16 @@ public class Notepad
 
     public  void deleteRecord(int pos)
     {
-        if (arrayOfRecords.length == 0 ||  pos > arrayOfRecords.length )
+        if (lastrec == 0 ||  pos > lastrec )
         {
-            throw new NullPointerException("Wrong position!");
+            try
+            {
+                throw new NullPointerException("Error");
+            }
+            catch(NullPointerException e)
+            {
+                System.out.println("Error in deleting!");
+            }
         }
         else
         {
