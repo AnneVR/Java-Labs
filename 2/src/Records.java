@@ -6,9 +6,16 @@ public class Records extends Notepad
     public void editRecord(int pos, String newRec)
     {
 
-        if (arrayOfRecords.length == 0 || pos > arrayOfRecords.length )
+        if (lastrec == 0 || pos > lastrec )
         {
-            throw new NullPointerException("Error!");
+            try
+            {
+                throw new NullPointerException("Error");
+            }
+            catch(NullPointerException e)
+            {
+                System.out.println("Error in editing!");
+            }
         }
         else
         {
