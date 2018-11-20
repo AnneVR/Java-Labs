@@ -1,0 +1,80 @@
+  public static boolean compare(String sourceImage, String targetImage)
+  {
+    float similarityThreshold =  70;
+    ByteBuffer sourceImageBytes = null;
+    ByteBuffer targetImageBytes = null;
+
+    AWSCredentials credentials;
+    try
+    {
+      credentials = new ProfileCredentialsProvider().getCredentials();
+    }
+    catch (Exception e)
+    {
+      throw new AmazonClientException("Cannot load the credentials from the credential profiles file. "
+              + "Please make sure that your credentials file is at the correct "
+              + "location (/Users/userid/.aws/credentials), and is in valid format.", e);
+    }
+
+    AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder
+            .standard()
+            .withRegion(com.amazonaws.regions.Regions.US_WEST_2)
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .build();
+
+    //Load source and target images and create input parameters
+    try
+    {
+      InputStream inputStream = new FileInputStream(new File(sourceImage));
+      sourceImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
+    }
+    catch (Exception e)
+    {
+      //System.out.println("Failed to load source image " + sourceImage);
+      System.exit(1);
+    }
+
+    try
+    {
+      InputStream inputStream = new FileInputStream(new File(targetImage));
+      targetImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
+    }
+    catch (Exception e)
+    {
+      //System.out.println("Failed to load target images: " + targetImage);
+      System.exit(1);
+    }
+
+    Image source = new Image().withBytes(sourceImageBytes);
+    Image target = new Image().withBytes(targetImageBytes);
+
+    CompareFacesRequest request = new CompareFacesRequest()
+                    .withSourceImage(source)
+                    .withTargetImage(target)
+                    .withSimilarityThreshold(similarityThreshold);
+
+    // Call operation
+    CompareFacesResult compareFacesResult = rekognitionClient.compareFaces(request);
+
+
+    // Display results
+    List<CompareFacesMatch> faceDetails = compareFacesResult.getFaceMatches();
+    for (CompareFacesMatch match : faceDetails)
+    {
+      ComparedFace face = match.getFace();
+      BoundingBox position = face.getBoundingBox();
+      //System.out.println("Face at " + position.getLeft().toString() + " " + position.getTop() + " matches with " + face.getConfidence().toString() + "% confidence.");
+      try
+      {
+        drawFrame(targetImage, position.getLeft(), position.getTop(), position.getWidth(), position.getHeight());
+      }
+      catch (Exception ex)
+      {
+        ex.printStackTrace();
+      }
+    }
+    List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
+
+
+    return !faceDetails.isEmpty();
+  }
