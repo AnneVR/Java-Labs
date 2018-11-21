@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenuController">
+    <children>
+        <AnchorPane layoutY="104.0" onMousePressed="#initialize" prefHeight="497.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+            <children>
+                <Button fx:id="filesButton" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showFilesMenu" prefHeight="111.0" prefWidth="228.0" style="-fx-background-color: #008000;" text="Files" textFill="WHITE">
+                    <font>
+                        <Font name="Ink Free" size="40.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="471.0" layoutY="206.0" mnemonicParsing="false" onAction="#closeApp" onMousePressed="#initialize" prefHeight="111.0" prefWidth="228.0" style="-fx-background-color: #008000;" text="Exit" textFill="WHITE">
+                    <font>
+                        <Font name="Ink Free" size="40.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Label alignment="CENTER" layoutX="292.0" layoutY="-5.0" prefHeight="94.0" prefWidth="228.0" text="Notebook" textFill="WHITE">
+            <font>
+                <Font name="Ink Free" size="58.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
