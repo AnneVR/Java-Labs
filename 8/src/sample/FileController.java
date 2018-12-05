@@ -69,34 +69,34 @@ public class FileController {
         window.setContentText("Name:");
         Optional<String> file = window.showAndWait();
 
-        if (file.isPresent() && !file.get().isEmpty())
+        if (file.isPresent())
         {
-            try
+            if (!file.get().isEmpty())
             {
-                String nameFile = file.get() + ".txt";
-                new PrintWriter(nameFile, "UTF-8");
-                Desktop desktop = null;
-                if (Desktop.isDesktopSupported())
+                try
                 {
-                    desktop = Desktop.getDesktop();
+                    String nameFile = file.get() + ".txt";
+                    new PrintWriter(nameFile, "UTF-8");
+                    Desktop desktop = null;
+                    if (Desktop.isDesktopSupported()) {
+                        desktop = Desktop.getDesktop();
+                    }
+                    File txtFile = new File(nameFile);
+                    desktop.open(txtFile);
+
+                } catch (NullPointerException e) {
+                    System.out.println(e);
                 }
-                File txtFile = new File(nameFile);
-                desktop.open(txtFile);
             }
-            catch (NullPointerException e)
+            else
             {
-                System.out.println(e);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Create file");
+                alert.setHeaderText(null);
+                alert.setContentText("Enter name of the file!");
+                alert.showAndWait();
             }
 
-
-        }
-        else if (file.isPresent())
-        {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Create file");
-            alert.setHeaderText(null);
-            alert.setContentText("Enter name of the file!");
-            alert.showAndWait();
         }
 
     }
@@ -160,18 +160,22 @@ public class FileController {
                 window.setContentText("Record:");
                 Optional <String> result = window.showAndWait();
                 writer.append("\n");
-                if(result.isPresent() && !result.get().isEmpty())
+
+                if(result.isPresent())
                 {
-                    writer.append(result.get());
-                    writer.close();
-                }
-                else if (result.isPresent())
-                {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Edit");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Enter the record!");
-                    alert.showAndWait();
+                    if (!result.get().isEmpty())
+                    {
+                        writer.append(result.get());
+                        writer.close();
+                    }
+                    else
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Edit");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Enter the record!");
+                        alert.showAndWait();
+                    }
                 }
             }
             catch (IOException e)

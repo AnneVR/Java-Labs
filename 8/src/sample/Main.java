@@ -8,21 +8,24 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-    public Main()
+    public void start(Stage primaryStage)
     {
-
+        try
+        {
+            Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("menu.fxml"));
+            primaryStage.setTitle("Notebook");
+            primaryStage.setScene(new Scene(root, 788.0D, 589.0D));
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        }
+        catch (Exception excep)
+        {
+            excep.printStackTrace();
+        }
     }
 
-    public void start(Stage primaryStage) throws Exception
+    public static void main(String[] args)
     {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("menu.fxml"));
-        primaryStage.setTitle("Notebook");
-        primaryStage.setScene(new Scene(root, 788.0D, 589.0D));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
         launch(args);
     }
 }
